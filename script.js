@@ -8,23 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const letter = new Audio("ldyiah_letter.mp3");
     const audios = [
-        {song:"audio5.mp3", text:"You are the best wish"},
-        {song:"audio1.mp3", text:"You are simply the best"}, 
+        {song:"audio5.mp3", text:"Best wish is you"},
+        {song:"audio1.mp3", text:"simply the best"}, 
         {song:"audio15.mp3", text: "Wish you Good Life"},
         {song:"audio17.mp3", text: "Fight for you"},
         {song:"audio16.mp3", text: "Wish you Good Health"},
         {song:"audio2.mp3", text: "I can go the distance for you"},
         {song:"audio3.mp3", text: "I can do anything for you"},
-        {song:"audio4.mp3", text: "Who is this divine soul that graces my world?"},
+        {song:"audio4.mp3", text: "Divine soul in my world"},
         {song:"audio12.mp3", text: "For you Always"},
-        {song:"audio11.mp3", text: "lost in the echoes of time and space, yet somehow, they still find their way back to us"},
-        {song:"audio10.mp3", text: "Drifting through time, defying gravity, moments rise where even the stars dare not to fall"},
-        {song:"audio6.mp3", text: "Each day is a treasure, adorned with your memories"},
-        {song:"audio8.mp3", text: "My heart is lingered with your memories"},
+        {song:"audio11.mp3", text: "Lost in time & space"},
+        {song:"audio18.mp3", text:"Into your arms"},
+        {song:"audio19.mp3", text:"Bring Me Back"},
+        {song:"audio10.mp3", text: "Defying gravity for love"},
+        {song:"audio6.mp3", text: "Aadorned with memories of you"},
+        {song:"audio8.mp3", text: "My heart lingerswith memories of you"},
         {song:"lydiahfav.mp3", text: "Wish you Good time"},
         {song:"audio14.mp3", text: "A Star is Born"},
-        {song:"audio7.mp3", text: "If happiness would be tangible, you're happiness"},
-        {song:"audio13.mp3", text: "Hope is the light that guides us through the darkest nights."},
+        {song:"audio7.mp3", text: "Wish you Happiness"},
+        {song:"audio13.mp3", text: " All My hope  is for you"},
     ];
     const audioElements = audios.map(audio => new Audio(audio.song)); // Creates audio elements
 
@@ -94,9 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
         // Loop through photos using modulus
         const photoIndex = index % photos.length;
+        // const photoIndex = Math.floor(Math.random() * photos.length);
         templateDiv.style.backgroundImage = `url('${photos[photoIndex]}')`;
     
-        templateDiv.innerHTML = `<span>${ad.text}</span>`;
+        setTimeout(function() {templateDiv.innerHTML = `<span>${ad.text}</span>`;},2000)
         section[1].appendChild(templateDiv);
     });
     
@@ -118,12 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Play the audio corresponding to the visible template-div
                     if (currentIndex !== -1) {
                         currentAudio = audioElements[currentIndex];
-                        currentAudio.play()
                         audioElements[currentIndex].loop = true; 
                         entry.target.scrollIntoView({ behavior: "smooth", block: "center" });
                         entry.target.classList.add('entrance');
 
-                        
+                        setTimeout(() => {
+                            currentAudio.play();
+                        }, 500);
+              
 
                         handlePlaying();
                         // Remove previous event listeners to avoid stacking
