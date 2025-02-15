@@ -68,7 +68,7 @@ main{
     background:#121212;
     color:#f4f4f4;
     width: 70%;
-    height: 90vh;
+    height: auto;
     margin-bottom: 10px;
     display:flex;
     align-items: center;
@@ -152,6 +152,7 @@ main{
     }
     .intro-div {
         width: 98%;
+        
     }
     .intro-div h3, .intro-div h2 , .intro-div p{
         text-align: center;
