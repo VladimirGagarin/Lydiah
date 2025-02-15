@@ -68,7 +68,7 @@ main{
     background:#121212;
     color:#f4f4f4;
     width: 70%;
-    height: auto;
+    height: 100vh;
     margin-bottom: 10px;
     display:flex;
     align-items: center;
@@ -152,7 +152,8 @@ main{
     }
     .intro-div {
         width: 98%;
-        
+        overflow-y: auto;
+        padding: 15px 0;
     }
     .intro-div h3, .intro-div h2 , .intro-div p{
         text-align: center;
@@ -171,6 +172,7 @@ main{
 
     header button{
         padding: 5px 10px;
+        font-size: 1rem;
     }
 
     .some-actions-chhoices button:hover{
@@ -246,7 +248,15 @@ main section {
     text-align: center;
    text-transform: capitalize;
    animation: myAnim3 3s ease 0s 1 normal forwards;
+   transform-style: preserve-3d;
+   transform: rotateX(10deg) rotateY(5deg);
+   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+   will-change: transform, opacity;
+   transform: translate3d(-250px, 0, 0);
+   perspective: 1000px;
 }
+
 
 
 .template-div::before{
@@ -285,7 +295,7 @@ main section {
 }
 
 .template-div.entrance{
-    animation: slideLeft 2s ease 0s 1 normal forwards;
+    animation: slideLeft 1s ease 0s 1 normal forwards;
 }
 
 .template-div.exit {
@@ -298,11 +308,14 @@ main section {
         width: 98%; /* Use more width on small screens */
         min-height: 85vh; /* Reduce height a little */
         margin-bottom: 10px;
+       
+      
     }
 
     .template-div span {
         font-size: 2.5rem; /* Reduce text size */
     }
+
 }
 
 /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -320,6 +333,7 @@ main section {
     height: auto;
     text-align: left;
     position: relative;
+    animation: myAnim3 3s ease 0s 1 normal forwards;
 }
 
 
@@ -496,15 +510,14 @@ main section {
 }
 
 @keyframes slideLeft {
-	0% {
-		opacity: 0;
-		transform: translateX(-250px);
-	}
-
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
+    0% {
+        opacity: 0;
+        transform: translateX(-250px);
+    }
+    100% {
+        opacity: 1;
+        transform:  translateX(0);
+    }
 }
 
 @keyframes slideRight {
