@@ -5,10 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const introDiv = document.querySelector('.intro-div');
     const homeBtn = document.querySelector('header  button');
     const ReadBtn = document.querySelectorAll('.letter-div .overlay-letter-div span')[0];
+    
     const letter = new Audio("ldyiah_letter.mp3");
     const audios = [
         {song:"audio5.mp3", text:"You are the best wish"},
         {song:"audio1.mp3", text:"You are simply the best"}, 
+        {song:"audio15.mp3", text: "Wish you Good Life"},
+        {song:"audio17.mp3", text: "Fight for you"},
+        {song:"audio16.mp3", text: "Wish you Good Health"},
         {song:"audio2.mp3", text: "I can go the distance for you"},
         {song:"audio3.mp3", text: "I can do anything for you"},
         {song:"audio4.mp3", text: "Who is this divine soul that graces my world?"},
@@ -18,7 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
         {song:"audio6.mp3", text: "Each day is a treasure, adorned with your memories"},
         {song:"audio8.mp3", text: "My heart is lingered with your memories"},
         {song:"lydiahfav.mp3", text: "Wish you Good time"},
+        {song:"audio14.mp3", text: "A Star is Born"},
         {song:"audio7.mp3", text: "If happiness would be tangible, you're happiness"},
+        {song:"audio13.mp3", text: "Hope is the light that guides us through the darkest nights."},
     ];
     const audioElements = audios.map(audio => new Audio(audio.song)); // Creates audio elements
 
@@ -115,6 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentAudio.play()
                         audioElements[currentIndex].loop = true; 
                         entry.target.scrollIntoView({ behavior: "smooth", block: "center" });
+                        entry.target.classList.add('entrance');
+
+                        
 
                         handlePlaying();
                         // Remove previous event listeners to avoid stacking
@@ -151,8 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         currentAudio.addEventListener('error', handleError);
                     }
                 }
+
+                
             });
-        }, { root: null, threshold: 0.4 });
+        }, { root: null, threshold: 0.5 });
 
         section[1].querySelectorAll('.template-div').forEach(div => observer.observe(div));
     
