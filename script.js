@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {song:"audio18.mp3", text:"Into your arms"},
         {song:"audio19.mp3", text:"Bring Me Back"},
         {song:"audio10.mp3", text: "Defying gravity for love"},
-        {song:"audio6.mp3", text: "Aadorned with memories of you"},
+        {song:"audio6.mp3", text: "Adorned with memories of you"},
         {song:"audio8.mp3", text: "My heart lingerswith memories of you"},
         {song:"lydiahfav.mp3", text: "Wish you Good time"},
         {song:"audio14.mp3", text: "A Star is Born"},
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentAudio = null;
 
-    const photos = ['lydia.jpg', 'lydia02.jpg','lydia03.jpg','lydia04.jpg', 'lydia05.jpg'];
+    const photos = ['lydia.jpg', 'lydia02.jpg','lydia03.jpg','lydia04.jpg', 'lydia05.jpg', 'lydia02.jpg', "lyd.jpg"];
 
     introDiv.querySelectorAll('.some-actions-chhoices button').forEach((btn, index) => {
         btn.onclick = () => showSection(true, index);
