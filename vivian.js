@@ -860,6 +860,8 @@ document.addEventListener("DOMContentLoaded", (function() {
             document.querySelector(".progress-bar").style.width = `${t}%`, c(d.currentTime)
         })), d.addEventListener("ended", (() => {
             f(!1), i = 0, h = -1
+
+            document.querySelector('.songlist-overlay').classList.add('active');
         }))
     }
 
