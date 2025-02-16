@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const introDiv = document.querySelector('.intro-div');
     const homeBtn = document.querySelector('header  button');
     const ReadBtn = document.querySelectorAll('.letter-div .overlay-letter-div span')[0];
+    const vidContainer = document.querySelector('.video-div');
+    const lydiahVideo = vidContainer.querySelector('video');
+    const playVidBtn =  vidContainer.querySelectorAll('.controls-video .buttons-actions button')[0];
+    const muteBtn = vidContainer.querySelectorAll('.controls-video .buttons-actions button')[1];
+    const  fullScreenBtn = vidContainer.querySelectorAll('.controls-video .buttons-actions button')[2];
+    const progressBar = vidContainer.querySelector('.controls-video .progress-video-truck .progress-video-bar');
+    let isMute = false;
+    let isPlayingVid = false;
+    let isFullscreen = false;
+
     
     const letter = new Audio("ldyiah_letter.mp3");
     const audios = [
@@ -66,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(function() {
         showLoading(false);
-    },6000)
+    },10000)
 
     homeBtn.onclick = () => {
         document.querySelectorAll('main section').forEach((sect) => {
@@ -88,6 +98,16 @@ document.addEventListener('DOMContentLoaded', () => {
         );
 
         document.querySelector('.overlay-letter-div').style.display = 'flex';
+
+        if(!lydiahVideo.paused) {
+            lydiahVideo.pause();
+            lydiahVideo.currentTime = 0;
+            isPlayingVid = false;
+            isMute = true;
+            lydiahVideo.muted = isMute;
+            muteBtn.innerHTML = '&#128264;';
+            playVidBtn.innerHTML = "&#9654;";
+        }
     }
 
     
@@ -219,4 +239,83 @@ document.addEventListener('DOMContentLoaded', () => {
 
         section[1].querySelectorAll('.template-div').forEach(div => observer.observe(div));
     
+    lydiahVideo.muted = isMute;
+    muteBtn.innerHTML = isMute ? '&#128264;' : '&#128266;';
+    muteBtn
+    lydiahVideo.addEventListener('click', () => {
+        isPlayingVid = !isPlayingVid;
+        playVideo(isPlayingVid);
+    });
+
+    function playVideo(state) {
+        if(state) {
+            lydiahVideo.play();
+        }
+        else{
+            lydiahVideo.pause();
+        }
+
+        playVidBtn.innerHTML = state ? '&#10074;&#10074;' : "&#9654;";
+
+        lydiahVideo.ontimeupdate = function () {
+            const percent = (lydiahVideo.currentTime / lydiahVideo.duration) * 100;
+
+            progressBar.style.width = `${percent}%`;
+        }
+
+        lydiahVideo.addEventListener('stalled', () => showLoading(true));
+        lydiahVideo.addEventListener('playing', () => showLoading(false));
+        lydiahVideo.addEventListener('waiting', () => showLoading(true));
+        lydiahVideo.addEventListener('error', () => location.reload());
+        
+        lydiahVideo.addEventListener("ended", () => {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+                isFullscreen = false;
+                fullScreenBtn.innerHTML = "&#x26F6;";
+            }
+
+            isPlayingVid = false;
+            playVidBtn.innerHTML = "&#9654;";
+            progressBar.style.width = 0;
+
+        });
+        
+    }
+
+    playVidBtn.onclick = function (e) {
+        e.stopPropagation();
+        isPlayingVid = !isPlayingVid;
+        playVideo(isPlayingVid)
+    }
+
+    muteBtn.onclick = function () {
+        isMute = !isMute;
+
+        lydiahVideo.muted = isMute;
+        muteBtn.innerHTML = isMute ? '&#128264;' : '&#128266;';
+    }
+
+    fullScreenBtn.addEventListener("click", () => {
+        isFullscreen = !isFullscreen
+
+        if (!document.fullscreenElement) {
+            vidContainer.requestFullscreen();
+            isFullscreen =true;
+        } else {
+            document.exitFullscreen();
+            isFullscreen = false;
+        }
+
+        fullScreenBtn.innerHTML = isFullscreen ? "&#x2715;" : "&#x26F6;";
+
+        setTimeout(function() {
+            vidContainer.scrollIntoView({behavior:"smooth", block:"center"})
+        },2000);
+
+    });
+
+    lydiahVideo.oncontextmenu = (e) => {
+        e.preventDefault();
+    }
 });
