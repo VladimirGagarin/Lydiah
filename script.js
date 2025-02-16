@@ -60,6 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
         homeBtn.disabled = !state;
     }
 
+    function showLoading(state){
+        document.querySelector('.loading-page').style.display = state ? "flex" : "none";
+    }
+
+    setTimeout(function() {
+        showLoading(false);
+    },6000)
+
     homeBtn.onclick = () => {
         document.querySelectorAll('main section').forEach((sect) => {
             sect.style.display = 'none';    
@@ -167,14 +175,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         // Define event handler functions
                         function handleStalled() {
                             entry.target.classList.add('loading');
+                            showLoading(true);
                         }
 
                         function handlePlaying() {
                             entry.target.classList.remove('loading');
+                            showLoading(false);
                         }
 
                         function handleWaiting() {
                             entry.target.classList.add('loading');
+                            showLoading(true);
                         }
 
                         function handleError() {
