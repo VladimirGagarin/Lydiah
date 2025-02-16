@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isMute = false;
     let isPlayingVid = false;
     let isFullscreen = false;
+    let wasPlaying = false;
 
     
     const letter = new Audio("ldyiah_letter.mp3");
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {song:"audio18.mp3", text:"Into your arms"},
         {song:"audio19.mp3", text:"Bring Me Back"},
         {song:"audio10.mp3", text: "Defying gravity for love"},
-        {song:"audio29.mp3", text:"You Perfect always"},
+        {song:"audio29.mp3", text:"You are Perfect always"},
         {song:"audio30.mp3", text:"From this moment"},
         {song:"audio6.mp3", text: "Adorned with memories of you"},
         {song:"audio8.mp3", text: "My heart lingerswith memories of you"},
@@ -96,6 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
             audio.pause(); 
             audio.currentTime = 0}
         );
+
+        wasPlaying = false;
 
         document.querySelector('.overlay-letter-div').style.display = 'flex';
 
@@ -170,20 +173,32 @@ document.addEventListener('DOMContentLoaded', () => {
               
                         // When the current song ends, play the next one
                         currentAudio.addEventListener('ended', () => {
-                            let nextIndex = (currentIndex + 1) % audioElements.length; // Move to next or loop to start
-                            let nextAudio = audioElements[nextIndex];
-
-                            // Scroll to next template-div
-                            let nextEntry = section[1].children[nextIndex];
-                            if (nextEntry) {
-                                nextEntry.scrollIntoView({ behavior: "smooth", block: "center" });
-                                nextEntry.classList.add('entrance');
+                            let nextIndex = currentIndex + 1;
+                        
+                            if (nextIndex < audioElements.length) {
+                                // If there's a next song, play it
+                                let nextAudio = audioElements[nextIndex];
+                                let nextEntry = section[1].children[nextIndex];
+                        
+                                if (nextEntry) {
+                                    nextEntry.scrollIntoView({ behavior: "smooth", block: "center" });
+                                    nextEntry.classList.add('entrance');
+                                }
+                        
+                                setTimeout(() => {
+                                    nextAudio.play();
+                                }, 500);
+                            } else {
+                                // If it's the last song, scroll to the top of the page
+                                document.documentElement.scrollTop = 0;
+                                
+                                audioElements.forEach(audio => {
+                                    audio.pause(); 
+                                    audio.currentTime = 0;
+                                });
                             }
-
-                            setTimeout(() => {
-                                nextAudio.play();
-                            }, 500);
                         });
+                        
 
                         handlePlaying();
                         // Remove previous event listeners to avoid stacking
@@ -196,16 +211,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         function handleStalled() {
                             entry.target.classList.add('loading');
                             showLoading(true);
+                            wasPlaying = false;
                         }
 
                         function handlePlaying() {
                             entry.target.classList.remove('loading');
                             showLoading(false);
+                            wasPlaying = true;
                         }
 
                         function handleWaiting() {
                             entry.target.classList.add('loading');
                             showLoading(true);
+                            wasPlaying = false;
                         }
 
                         function handleError() {
@@ -214,6 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             });
 
                             if (introDiv) introDiv.style.display = 'flex';
+
+                            wasPlaying = false;
                         }
 
                         // Attach event listeners
@@ -225,9 +245,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         document.addEventListener('visibilitychange', () => {
                             if (document.visibilityState === "hidden") {
-                                currentAudio.pause();
+                                if (!currentAudio.paused) {
+                                    wasPlaying = true;
+                                    currentAudio.pause();
+                                }
                             } else {
-                                currentAudio.play();
+                                if (wasPlaying) {
+                                    currentAudio.play();
+                                    wasPlaying = false; // Reset after resuming
+                                }
                             }
                         });                        
                     }
