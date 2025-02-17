@@ -10,6 +10,17 @@ document.addEventListener("DOMContentLoaded", (function() {
         l = null,
         i = 0,
         h = -1;
+
+    
+
+    function toggledBtn() {
+        if(!d)n.classList.toggle('disabled',true);
+        else{n.classList.toggle('disabled',false)}
+        
+    }
+
+    toggledBtn();
+
     const u = ['lydia.jpg', 'lydia02.jpg','lydia03.jpg','lydia04.jpg', 'lydia05.jpg'],
         x = ["anim-fade-in", "anim-slide-in", "anim-zoom-in", "anim-wobble-left", "anim-wobble-right", "anim-wobble-top", "anim-shake-top", "anim-roll-bottom", "anim-roll-top", "anim-fade-backward", "anim-slide-right", "anim-scale-forward"],
         y = [{
@@ -831,6 +842,159 @@ document.addEventListener("DOMContentLoaded", (function() {
             text: "I'm here for you always",
             start: 204,
             end: 205
+        }],
+        lt = [{
+            text: "Lydiah Wambui",
+            start: 0,
+            end: 7
+        },{
+            text: "Some people long for a life that is simple and planned",
+            start: 8,
+            end: 14
+        }, {
+            text: "Tied with a ribbon",
+            start: 15,
+            end: 16
+        }, {
+            start: 17,
+            text: "Some people won't sail the sea 'cause they're safer on land",
+            end: 23
+        }, {
+            start: 24,
+            text: "To follow what's written",
+            end: 26
+        }, {
+            start: 27,
+            text: "But I'd follow you to the great unknown",
+            end: 34
+        }, {
+            start: 35,
+            text: "Off to a world we call our own",
+            end: 43
+        }, {
+            start: 46,
+            text: "Hand in my hand and we promised to never let go",
+            end: 51
+        }, {
+            start: 52,
+            text: "We're walking a tightrope",
+            end: 55
+        }, {
+            start: 56,
+            text: "High in the sky we can see the whole world down below",
+            end: 60
+        }, {
+            start: 61,
+            text: "We're walking a tightrope",
+            end: 65
+        }, {
+            start: 66,
+            text: "Never sure, never know how far we could fall",
+            end: 72
+        }, {
+            start: 73,
+            text: "But it's all an adventure that comes with a breathtaking view",
+            end: 79
+        }, {
+            start: 80,
+            text: "Walking a tightrope",
+            end: 84
+        }, {
+            start: 85,
+            text: "With you, ooh, ooh, ooh, ooh",
+            end: 91
+        }, {
+            start: 92,
+            text: "With you, ooh, ooh, ooh, ooh",
+            end: 99
+        }, {
+            start: 100,
+            text: "With you",
+            end: 101
+        }, {
+            start: 102,
+            text: "Mountains and valleys, and all that will come in between",
+            end: 107
+        }, {
+            start: 108,
+            text: "Desert and ocean",
+            end: 110
+        }, {
+            start: 111,
+            text: "You pulled me in and together we're lost in a dream",
+            end: 116
+        }, {
+            start: 117,
+            text: "Always in motion",
+            end: 119
+        }, {
+            start: 120,
+            text: "So I risk it all just to be with you",
+            end: 127
+        }, {
+            start: 128,
+            text: "And I risk it all for this life we choose",
+            end: 136
+        }, {
+            start: 137,
+            text: "Hand in my hand",
+            end: 139
+        }, {
+            start: 140,
+            text: "And you promised to never let go",
+            end: 143
+        }, {
+            start: 144,
+            text: "We're walking a tightrope",
+            end: 146
+        }, {
+            start: 147,
+            text: "High in the sky",
+            end: 148
+        }, {
+            start: 149,
+            text: "We can see the whole world down below",
+            end: 152
+        }, {
+            start: 153,
+            text: "We're walking a tightrope",
+            end: 156
+        }, {
+            start: 157,
+            text: "Never sure, will you catch me if I should fall?",
+            end: 165
+        }, {
+            start: 168,
+            text: "Well, it's all an adventure that comes with a breathtaking view",
+            end: 175
+        }, {
+            start: 176,
+            text: "Walking a tightrope",
+            end: 188
+        }, {
+            start: 189,
+            text: "With you, ooh, ooh, ooh, ooh",
+            end: 194
+        }, {
+            start: 195,
+            text: "With you",
+            end: 197
+        }, {
+            start: 198,
+            text: "With you, ooh, ooh, ooh, ooh",
+            end: 208
+        }, {
+            start: 209,
+            text: "With you",
+            end: 215
+        }, {
+            start: 216,
+            text: "With you",
+            end: 224
+        }, {
+            start: 225,
+            text: "Thanks for your time Lydiah Wambui",
+            end: 234
         }];
 
     function c(e) {
@@ -866,17 +1030,19 @@ document.addEventListener("DOMContentLoaded", (function() {
     }
 
     function f(t) {
-        n.innerHTML = t ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>'
+        n.innerHTML = t ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
+        toggledBtn();
     }
     a.addEventListener("click", (() => {
         o.classList.add("active")
     })), r.onclick = () => {
         o.classList.remove("active")
-    }, ["Audio (1).mp3", "Audio (2).mp3", "Audio (3).mp3", "Audio (4).mp3"].forEach(((e, n) => {
+    }, ["Audio (1).mp3", "Audio (2).mp3", "Audio (3).mp3", "Audio (4).mp3", "Audio(5).mp3"].forEach(((e, n) => {
         const a = document.createElement("li");
         a.textContent = e.replace(".mp3", ""), a.addEventListener("click", (() => {
             o.classList.remove("active");
             const a = new Audio(e);
+            toggledBtn();
             switch (t.innerHTML = "", i = 0, h = -1, n) {
                 case 0:
                     l = m;
@@ -889,6 +1055,9 @@ document.addEventListener("DOMContentLoaded", (function() {
                     break;
                 case 3:
                     l = y;
+                    break;
+                case 4:
+                    l = lt;
                     break;
                 default:
                     l = null
