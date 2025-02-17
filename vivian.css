@@ -61,7 +61,10 @@ body {
     transition: background 0.3s, transform 0.3s;
 }
 
-
+.buttons-container span.disabled{
+    pointer-events: none;
+    opacity: 0.1;
+}
 
 .progress-truck {
     width: 80%;
